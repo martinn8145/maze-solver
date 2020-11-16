@@ -57,7 +57,7 @@ public class Graph {
 		}
 	}
 
-	public void printAllLists() {
+	public void printAllLists() {	// prints out all adjacency lists
 		for (int i = 0; i < adj.length; i++) { 
 			System.out.println("Adjacency list of vertex " + list.get(i).getRow() + " " + list.get(i).getColumn() + ": "); 
 			for (int j = 0; j < adj[i].size(); j++) { 
@@ -66,7 +66,7 @@ public class Graph {
 			System.out.println(); 
 		} 
 	}
-	public LinkedList<Cell> getList(int x, int y){
+	public LinkedList<Cell> getList(int x, int y){ //gets the adjacency list for a specific cell
 		Cell c = new Cell(x,y);
 		int index = list.indexOf(c);
 		return adj[index];

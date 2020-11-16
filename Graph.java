@@ -57,7 +57,7 @@ public class Graph {
 		}
 	}
 
-	public void getList() {
+	public void printAllLists() {
 		for (int i = 0; i < adj.length; i++) { 
 			System.out.println("Adjacency list of vertex " + list.get(i).getRow() + " " + list.get(i).getColumn() + ": "); 
 			for (int j = 0; j < adj[i].size(); j++) { 
@@ -66,6 +66,11 @@ public class Graph {
 			System.out.println(); 
 		} 
 	}
+	public LinkedList<Cell> getList(int x, int y){
+		Cell c = new Cell(x,y);
+		int index = list.indexOf(c);
+		return adj[index];
+	}
 
 
 	public static void main (String[] args) {
@@ -73,7 +78,12 @@ public class Graph {
 		jeff.cellGenerator();
 		Graph g = new Graph(jeff.getCellList());
 		g.addEdge();
-		g.getList();
+		LinkedList<Cell> f = g.getList(0, 0);
+		for (Cell C : f) {
+		System.out.println(C.getRow() + "," + C.getColumn() + " ");
+		}
+		g.printAllLists();
+		
 
 
 	}

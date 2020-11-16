@@ -71,7 +71,9 @@ public class Graph {
 		int index = list.indexOf(c);
 		return adj[index];
 	}
-
+	public LinkedList<Cell>[] getArrayOfLinked() {
+		return adj;
+	}
 
 	public static void main (String[] args) {
 		Generator jeff = new Generator(3);

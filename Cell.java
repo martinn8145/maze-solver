@@ -17,7 +17,6 @@ public class Cell extends HashMap<String,Boolean> {
 	public Cell(int rowPosition, int columnPosition) {
 		this.rowPosition = rowPosition;
 		this.columnPosition = columnPosition;
-		visited = false;
 		// initialize all walls to be intact
 		// true (value) = intact
 		// false = destroyed
@@ -25,6 +24,11 @@ public class Cell extends HashMap<String,Boolean> {
 		this.put("West", true); // left wall
 		this.put("South", true); // bottom wall
 		this.put("East", true); // right wall
+		if (allWallsIntact()) {
+			visited = false;
+		} else {
+			visited = true;
+		}
 	}
 	
 	public int getRow() {

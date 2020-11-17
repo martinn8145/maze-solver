@@ -5,6 +5,7 @@ public class Graph {
 	private LinkedList<Cell>[] adj;	//array of linked lists
 	private ArrayList<Cell> list;
 	public Graph(ArrayList<Cell> cellList) {
+		Collections.sort(cellList);
 		list = cellList;
 		adj = new LinkedList[list.size()];
 		for (int i = 0; i < adj.length; i++){

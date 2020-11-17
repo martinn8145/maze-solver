@@ -65,7 +65,7 @@ public class Cell extends HashMap<String,Boolean> {
 		return this.get("North") && this.get("South") && this.get("West") && this.get("East");
 	}
 	
-	// implemrents comparable
+	// implements comparable
 	public int compareTo(Cell compareCell) {
 	        int compareage= compareCell.getRow();
 	        return this.getRow()-compareage;

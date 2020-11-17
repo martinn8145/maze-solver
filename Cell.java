@@ -9,7 +9,7 @@ import java.util.HashMap;
  * the walls will serve as keys, which contain boolean values indicating whether or not the wall is broken
  * all cells will be initialized with intact walls on all 4 sides
  */
-public class Cell extends HashMap<String,Boolean> {
+public class Cell extends HashMap<String,Boolean> implements Comparable<Cell>{
 	private int rowPosition;
 	private int columnPosition;
 	private boolean visited;

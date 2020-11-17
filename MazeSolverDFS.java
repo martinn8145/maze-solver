@@ -64,9 +64,8 @@ public class MazeSolverDFS extends MazeHelper {
 				} 
 			}
 		}
-		String shortestPathMaze = shortestPath(maze, path) + "\n";
 		String shortestPath = pathToString(path) + "\n";
-		
+		String shortestPathMaze = shortestPath(maze, path) + "\n";
 		return solvedMaze + "\n" + shortestPathMaze + shortestPath + "Visited Cells: " + visitedCells;
 	}
 	public static void main (String[] args) {

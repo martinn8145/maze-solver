@@ -64,4 +64,10 @@ public class Cell extends HashMap<String,Boolean> {
 	public boolean allWallsIntact() {
 		return this.get("North") && this.get("South") && this.get("West") && this.get("East");
 	}
+	
+	// implemrents comparable
+	public int compareTo(Cell compareCell) {
+	        int compareage= compareCell.getRow();
+	        return this.getRow()-compareage;
+	 }
 }

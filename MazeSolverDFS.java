@@ -19,9 +19,13 @@ public class MazeSolverDFS extends MazeHelper {
 		LinkedList<Cell>[] adjacencyList = graph.getArrayOfLinked();
 		int len = (int) Math.sqrt(adjacencyList.length);
 		int counter = 0;// the number being printed in the maze 
+		int visitedCells = 0;
+		String solvedMaze = maze;
 		
 		visited = new boolean[len][len];
 		Stack<Cell> cellStack = new Stack<Cell>();
+		Stack<Cell> path = new Stack<Cell>();
+		Stack<Cell> forks = new Stack<Cell>();
 		
 		cellStack.push(startingCell);
 		visited[startingCell.getRow()][startingCell.getColumn()] = true;
@@ -29,39 +33,54 @@ public class MazeSolverDFS extends MazeHelper {
 		while (!cellStack.isEmpty()) {
 			Cell currentCell = cellStack.pop();
 			int row = currentCell.getRow(), col = currentCell.getColumn();
-			maze = mazeEditor(maze, row, col, counter++);
+			solvedMaze = mazeEditor(solvedMaze, row, col, counter++);
+			path.push(currentCell);
+			visitedCells++;
 			//end of the maze means break
 			if (row == len - 1 && col == len - 1) {
 				break;
 			}
 			//edit the maze to show the current step
-			if (counter ==10) counter = 0; // only use single digit numbers
+			if (counter == 10) counter = 0; // only use single digit numbers
 			LinkedList<Cell> neighborList = graph.getList(row, col); 	//get the entire adjacency list for a cell
+						
+			if (neighborList.size()  == 4) {
+				forks.push(currentCell);
+			} 
+			
+			if (neighborList.size() == 2) {
+				if (forks.size() != 0) {
+					Cell lastFork = forks.pop();
+					while (path.peek() != lastFork) {
+						path.pop();
+					}
+				}
+			}
 			
 			for (Cell neighbor: neighborList) {		//iterate through to find unvisited cells
 				if (!visited[neighbor.getRow()][neighbor.getColumn()])  {
 					cellStack.push(neighbor);		//push the cells onto the stack and mark them as visited
 					visited[neighbor.getRow()][neighbor.getColumn()] = true;
-				}
+				} 
 			}
 		}
-		return maze;
+		String shortestPathMaze = shortestPath(maze, path) + "\n";
+		String shortestPath = pathToString(path) + "\n";
+		
+		return solvedMaze + "\n" + shortestPathMaze + shortestPath + "Visited Cells: " + visitedCells;
 	}
-
 	public static void main (String[] args) {
-		MazeGenerator jeff = new MazeGenerator(4);
+		MazeGenerator jeff = new MazeGenerator(6);
 		jeff.cellGenerator();
 		MazePrinter mp = new MazePrinter();
 		Cell[][] cellArray = mp.listTo2DArray(jeff.getCellList());
-		String maze = mp.printMaze(cellArray);
 		Graph graph = new Graph(jeff.getCellList());
-		//System.out.println(maze);
+		String maze = mp.printMaze(cellArray);
 		MazeSolverDFS ms = new MazeSolverDFS();
 		Cell startingCell = cellArray[0][0];
-		System.out.print(ms.mazeSolver(graph, maze, startingCell));
-		//maze = ms.mazeEditor(maze, 0, 0, 0);
-		//System.out.println(maze);
-		//System.out.println(ms.mazeEditor(maze, 5, 5, 1));
+		String solvedMaze = ms.mazeSolver(graph, maze, startingCell);
+		System.out.println(maze);
+		System.out.println(solvedMaze);
 		
 	}
 }

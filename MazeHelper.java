@@ -1,6 +1,6 @@
 package nguyen.cs146project3;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class MazeHelper {
 	public Cell[][] listTo2DArray(ArrayList<Cell> cellList) {

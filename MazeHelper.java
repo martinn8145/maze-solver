@@ -26,8 +26,28 @@ public class MazeHelper {
 		// combine to get the index of the cell
 		int cellIndex = rowIndex + colIndex;
 		// keep the maze the same until the cell, add the number, then add the rest of the maze
-		String newMaze = maze.substring(0, cellIndex) + number + maze.substring(cellIndex + 1);
+		maze = maze.substring(0, cellIndex) + number + maze.substring(cellIndex + 1);
 		
-		return newMaze;
+		return maze;
+	}
+	
+	public String pathToString(Stack<Cell> path) {
+		String pathString = "Path: ";
+		for (Cell cell: path) {
+			pathString += "(" + cell.getRow() + ", " + cell.getColumn() + ") ";
+		}
+		return pathString;
+	}
+	
+	public String shortestPath(String maze, Stack<Cell> shortestPath) {
+		int line = maze.indexOf("\n") + 1;
+		while (!shortestPath.isEmpty()) {
+			Cell currentCell = shortestPath.pop();
+			int rowIndex = line + (line * 2 * currentCell.getRow());
+			int colIndex = 1 + (currentCell.getColumn() * 2);
+			int cellIndex = rowIndex + colIndex;
+			maze = maze.substring(0, cellIndex) + "#" + maze.substring(cellIndex+1);
+		}
+		return maze;
 	}
 }

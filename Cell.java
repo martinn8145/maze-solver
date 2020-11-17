@@ -67,7 +67,14 @@ public class Cell extends HashMap<String,Boolean> {
 	
 	// implements comparable
 	public int compareTo(Cell compareCell) {
-	        int compareage= compareCell.getRow();
-	        return this.getRow()-compareage;
+	        int compareRow = compareCell.getRow();
+	        int compareCol = compareCell.getColumn();
+	        int thisRow = this.getRow();
+	        int thisCol = this.getColumn();
+	        int rowDiff = Integer.compare(thisRow,compareRow);
+	        if (rowDiff == 0) {
+	        	return Integer.compare(thisCol, compareCol);
+	        }
+	        return rowDiff;
 	 }
 }

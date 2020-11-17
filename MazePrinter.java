@@ -3,17 +3,6 @@ package nguyen.cs146project3;
 import java.util.ArrayList;
 
 public class MazePrinter {
-	public static Cell[][] listTo2DArray(ArrayList<Cell> cellList) {
-		int dimension = (int) Math.sqrt(cellList.size());
-		Cell[][] cellArray = new Cell[dimension][dimension];
-		for (int i = 0; i < cellList.size(); i++) {
-			Cell currentCell = cellList.get(i);
-			int row = currentCell.getRow();
-			int col = currentCell.getColumn();
-			cellArray[row][col] = currentCell;
-		}
-		return cellArray;
-	}
 	public static String printMaze(Cell[][] cellArray) {
 		String maze = "";
 		//first line

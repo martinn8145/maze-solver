@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class Cell extends HashMap<String,Boolean> implements Comparable<Cell>{
 	private int rowPosition;
 	private int columnPosition;
-	private boolean visited;
 	
 	public Cell(int rowPosition, int columnPosition) {
 		this.rowPosition = rowPosition;
@@ -24,11 +23,6 @@ public class Cell extends HashMap<String,Boolean> implements Comparable<Cell>{
 		this.put("West", true); // left wall
 		this.put("South", true); // bottom wall
 		this.put("East", true); // right wall
-		if (allWallsIntact()) {
-			visited = false;
-		} else {
-			visited = true;
-		}
 	}
 	
 	public int getRow() {
@@ -36,10 +30,6 @@ public class Cell extends HashMap<String,Boolean> implements Comparable<Cell>{
 	}
 	public int getColumn() {
 		return this.columnPosition;
-	}
-	
-	public boolean isVisited() {
-		return this.visited;
 	}
 	
 	public boolean deepEquals(Object x) {

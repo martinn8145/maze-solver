@@ -8,11 +8,14 @@ public class MazeGenerator {
 
 	private int size;
 	private ArrayList<Cell> cellList; // use cellList to keep track of every cell and its hashmap
+	private Random gen;	//used with seed (set in constructor) to pick random neighbor
 
 	// constructor to create a maze of cells with size x size dimensions
 	public MazeGenerator(int size) {
 		this.size = size;
 		cellList = new ArrayList<Cell>();
+		gen = new Random();
+		gen.setSeed(100);
 	}
 
 	public int getSize() {
@@ -154,8 +157,6 @@ public class MazeGenerator {
 	}
 
 	private String getRandomFromList(ArrayList<String> list) {
-		Random gen = new Random();
-		// gen.setSeed(23);
 		return list.get(gen.nextInt(list.size()));
 	}
 }

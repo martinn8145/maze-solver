@@ -1,5 +1,8 @@
 package Nguyen.cs146.project3;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+
 
 public class Graph {
 	private LinkedList<Cell>[] adj;	//array of linked lists

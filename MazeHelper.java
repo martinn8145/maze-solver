@@ -1,8 +1,13 @@
 package nguyen.cs146project3;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Stack;
+/**
+ * holds a multitude of helper functions for other classes to use
+ */
 public class MazeHelper {
+	
+	// converts arrayList of cells to a 2d array for convenience
 	public Cell[][] listTo2DArray(ArrayList<Cell> cellList) {
 		int dimension = (int) Math.sqrt(cellList.size());
 		Cell[][] cellArray = new Cell[dimension][dimension];
@@ -31,15 +36,8 @@ public class MazeHelper {
 		return maze;
 	}
 	
-	public String pathToString(Stack<Cell> path) {
-		String pathString = "Path: ";
-		for (Cell cell: path) {
-			pathString += "(" + cell.getRow() + ", " + cell.getColumn() + ") ";
-		}
-		return pathString;
-	}
-	
-	public String shortestPath(String maze, Stack<Cell> shortestPath) {
+	// similar to above method, edit the maze to add # on the path from start to finish
+	public String pathEditor(String maze, Stack<Cell> shortestPath) {
 		int line = maze.indexOf("\n") + 1;
 		while (!shortestPath.isEmpty()) {
 			Cell currentCell = shortestPath.pop();
@@ -50,4 +48,30 @@ public class MazeHelper {
 		}
 		return maze;
 	}
+	// converts an arrayList into a stack for convenience
+	public Stack<Cell> listToStack(ArrayList<Cell> cellList) {
+		Stack<Cell> returnStack = new Stack<Cell>();
+		for (Cell cell: cellList) {
+			returnStack.push(cell);
+		}
+		return returnStack;
+	}
+	// returns a string of the maze with shortest path and the path the algorithm took
+	public String mazeShortestPath(String maze, Stack<Cell> path) {
+		
+		String shortestPath = pathToString(path);
+		String shortestPathMaze = pathEditor(maze, path);
+		return shortestPathMaze + "\n" + shortestPath  +  "\n";
+		
+	}
+	
+	// returns a string of the path as the following: Path: (x1, y2) (x2, y2)...
+	public String pathToString(Stack<Cell> path) {
+		String pathString = "Path: ";
+		for (Cell cell: path) {
+			pathString += "(" + cell.getRow() + ", " + cell.getColumn() + ") ";
+		}
+		return pathString;
+	}
+
 }

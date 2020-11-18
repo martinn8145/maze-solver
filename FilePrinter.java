@@ -1,5 +1,6 @@
 package Nguyen.cs146.project3;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
 
 
 public class FilePrinter{

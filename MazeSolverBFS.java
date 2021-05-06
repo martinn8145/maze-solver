@@ -1,4 +1,4 @@
-package nguyen.cs146project3;
+package Nguyen.cs146.project3;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class MazeSolverBFS extends MazeHelper {
 		visited = new boolean[len][len]; // each traversed cell will have a boolean value depending on if its been
 											// visited before
 
-		Queue<Cell> cellQueue = new LinkedList<Cell>(); // use a stack to implement DFS
+		Queue<Cell> cellQueue = new LinkedList<Cell>(); // use a queue to implement BFS
 
 		// start with the starting cell
 		cellQueue.add(startingCell);
@@ -67,7 +67,7 @@ public class MazeSolverBFS extends MazeHelper {
 
 			for (Cell child : childList) { // iterate through to find unvisited cells
 				if (!visited[child.getRow()][child.getColumn()]) {
-					cellQueue.add(child); // push the cells onto the stack and mark them as visited
+					cellQueue.add(child); // push the cells onto the queue and mark them as visited
 					visited[child.getRow()][child.getColumn()] = true;
 					child.parentCell = currentCell; // make each child point to a parent
 				}
@@ -102,18 +102,5 @@ public class MazeSolverBFS extends MazeHelper {
 		String numCellsVisited = "Visited Cells: " + this.visitedCells;
 
 		return solvedMaze + shortestPath + numCellsVisited;
-	}
-
-	public static void main(String[] args) {
-		MazeGenerator jeff = new MazeGenerator(10);
-		jeff.cellGenerator();
-		MazePrinter mp = new MazePrinter();
-		Cell[][] cellArray = mp.listTo2DArray(jeff.getCellList());
-		String maze = mp.printMaze(cellArray);
-		Graph graph = new Graph(jeff.getCellList());
-		MazeSolverBFS ms = new MazeSolverBFS();
-		Cell startingCell = cellArray[0][0];
-		Cell lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		System.out.println(ms.mazeSolverBFS(graph, maze, startingCell, lastCell));
 	}
 }

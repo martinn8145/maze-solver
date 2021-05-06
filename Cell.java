@@ -1,5 +1,4 @@
-package nguyen.cs146project3;
-
+package Nguyen.cs146.project3;
 import java.util.HashMap;
 
 /**
@@ -11,8 +10,8 @@ import java.util.HashMap;
  */
 public class Cell extends HashMap<String, Boolean> implements Comparable<Cell> {
 
-	private int rowPosition;
-	private int columnPosition;
+	private int rowPosition;	// the row position of the cell
+	private int columnPosition;	// the column position of the cell
 
 	Cell parentCell; // for BFS, have each cell have a parentCell unless its the first cell; useful
 						// for backtracking
@@ -29,11 +28,11 @@ public class Cell extends HashMap<String, Boolean> implements Comparable<Cell> {
 		this.put("East", true); // right wall
 	}
 
-	public int getRow() {
+	public int getRow() {			// gets the row
 		return this.rowPosition;
 	}
 
-	public int getColumn() {
+	public int getColumn() {		// gets the column
 		return this.columnPosition;
 	}
 

@@ -1,13 +1,12 @@
-package nguyen.cs146project3;
-
+package Nguyen.cs146.project3;
 import java.util.LinkedList;
 import java.util.Stack;
 
 // uses the DFS approach to solving the maze, finds the shortest path and the visited cells
 public class MazeSolverDFS extends MazeHelper {
 	private boolean[][] visited; // boolean array to check if cell at visited[row][column] has been visited
-	private Stack<Cell> path; // keeps track of the path of the solver; will be returned as the shortest
-								// possible path
+	private Stack<Cell> path; // keeps track of the path of the solver
+	private String shortestPath;	// keeps track of the shortest path as a string
 	private int visitedCells; // keeps track of total amount of visited cells in the search
 
 	// constructor to initialize instance variables
@@ -91,7 +90,7 @@ public class MazeSolverDFS extends MazeHelper {
 		return solvedMaze + "\n";
 	}
 
-	public Stack<Cell> getPath() {
+	public Stack<Cell> getPath() {	// returns the path
 		return this.path;
 	}
 
@@ -99,23 +98,13 @@ public class MazeSolverDFS extends MazeHelper {
 	// number of visited cells
 	public String mazeSolverDFS(Graph graph, String maze, Cell startingCell) {
 		String solvedMaze = mazeDFS(graph, maze, startingCell); // the solved maze DFS approach
-		String shortestPath = mazeShortestPath(maze, this.path); // the shortest path from start to finish
+		shortestPath = mazeShortestPath(maze, this.path); // the shortest path from start to finish
 		String numCellsVisited = "Visited Cells: " + this.visitedCells;
 
 		return solvedMaze + shortestPath + numCellsVisited;
 	}
-
-	public static void main(String[] args) {
-		MazeGenerator jeff = new MazeGenerator(10);
-		jeff.cellGenerator();
-		MazePrinter mp = new MazePrinter();
-		Cell[][] cellArray = mp.listTo2DArray(jeff.getCellList());
-		Graph graph = new Graph(jeff.getCellList());
-		String maze = mp.printMaze(cellArray);
-		MazeSolverDFS ms = new MazeSolverDFS();
-		Cell startingCell = cellArray[0][0];
-		String solvedMaze = ms.mazeSolverDFS(graph, maze, startingCell);
-		System.out.println(solvedMaze);
-
+	
+	public String getShortestPath() { // returns the shortest path
+		return shortestPath;
 	}
 }

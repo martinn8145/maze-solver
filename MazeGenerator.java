@@ -1,4 +1,4 @@
-package nguyen.cs146project3;
+package Nguyen.cs146.project3;
 
 import java.util.ArrayList;
 import java.util.Random;

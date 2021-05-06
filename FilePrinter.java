@@ -8,15 +8,15 @@ public class FilePrinter{
 
 	public void writeData(String mazeName, String maze, String fileName) {
 		//write to file
-		File f = new File("output/"+ fileName +".txt"); 
+		File f = new File("output/"+ fileName +".txt"); //the file will be found in the output folder
 		try {
 			if (!f.exists()) {
 				f.createNewFile();
 			}
 			fr = new FileWriter(f,true);
-			fr.write(mazeName); //The Maze, DFS maze, DFS short maze, BFS maze, or BFS short maze
+			fr.write(mazeName); //title of maze: The Maze, DFS maze, or BFS maze
 			fr.write("\n");
-			fr.write(maze);
+			fr.write(maze);	// this is where the maze will be printed
 			fr.write("\n");
 
 			fr.close();
@@ -25,16 +25,5 @@ public class FilePrinter{
 			e.printStackTrace();
 			System.out.print("Problem writing in file.");
 		}
-	}
-	public static void main (String[] args) {
-		FilePrinter f = new FilePrinter();
-		Generator g = new Generator(3);
-		MazePrinter m = new MazePrinter();
-		g.cellGenerator();
-		String s = m.printMaze(m.listTo2DArray(g.getCellList()));
-		System.out.print(s);
-		f.writeData("The Maze" ,s, "maze");
-
-
 	}
 }

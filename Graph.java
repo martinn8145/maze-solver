@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Graph {
 	private LinkedList<Cell>[] adj;	//array of linked lists
-	private ArrayList<Cell> list;
+	private ArrayList<Cell> list;	// a copy of the sorted cellList parameter
 	public Graph(ArrayList<Cell> cellList) {
 		Collections.sort(cellList);
 		list = cellList;
@@ -77,20 +77,5 @@ public class Graph {
 	}
 	public LinkedList<Cell>[] getArrayOfLinked() {
 		return adj;
-	}
-
-	public static void main (String[] args) {
-		Generator jeff = new Generator(3);
-		jeff.cellGenerator();
-		Graph g = new Graph(jeff.getCellList());
-		g.addEdge();
-		LinkedList<Cell> f = g.getList(0, 0);
-		for (Cell C : f) {
-		System.out.println(C.getRow() + "," + C.getColumn() + " ");
-		}
-		g.printAllLists();
-		
-
-
 	}
 }

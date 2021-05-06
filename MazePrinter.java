@@ -1,5 +1,4 @@
-package nguyen.cs146project3;
-
+package Nguyen.cs146.project3;
 public class MazePrinter extends MazeHelper {
 
 	// returns a string of the empty maze created by the MazeGenerator class

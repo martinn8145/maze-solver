@@ -18,8 +18,8 @@ class MazeTester {
 	String bfsMaze;
 	String dfsMaze;
 	Graph graph;
-	Stack<Cell> shortestPathDFS;
-	Stack<Cell> shortestPathBFS;
+	String shortestPathDFS;
+	String shortestPathBFS;
 	
 	@BeforeEach
 	void setUp() {
@@ -39,27 +39,28 @@ class MazeTester {
 		System.out.println("TestCase1 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase1");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase1 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase1");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase1 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase1");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase1 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase1");	//prints out the BFS maze
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 	@Test
@@ -72,27 +73,29 @@ class MazeTester {
 		System.out.println("TestCase2 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase2");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase2 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase2");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase2 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase2");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase2 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase2");	//prints out the BFS maze
+		
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 	
@@ -106,27 +109,28 @@ class MazeTester {
 		System.out.println("TestCase3 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase3");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase3 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase3");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase3 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase3");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase3 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase3");	//prints out the BFS maze
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 	
@@ -140,27 +144,28 @@ class MazeTester {
 		System.out.println("TestCase4 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase4");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase4 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase4");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase4 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase4");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase4 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase4");	//prints out the BFS maze
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 	
@@ -174,27 +179,29 @@ class MazeTester {
 		System.out.println("TestCase5 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase5");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase5 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase5");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase5 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase5");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase5 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase5");	//prints out the BFS maze
+		
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 	
@@ -208,27 +215,29 @@ class MazeTester {
 		System.out.println("TestCase6 MazeGenerator Time: " + (time-start) + "ns");
 		
 		graph = new Graph(g.getCellList());
-		Cell[][] cellArray = h.listTo2DArray(g.getCellList());
+		Cell[][] cellArray = mp.listTo2DArray(g.getCellList());
 		s = mp.printMaze(cellArray);				// the maze
 		fp.writeData("The Maze", s, "testCase6");	//prints out the maze
 		
 		startingCell = cellArray[0][0];
 		lastCell = cellArray[cellArray.length - 1][cellArray.length - 1];
-		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
-		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
-		long BFStime = System.nanoTime();
-		System.out.println("TestCase6 BFS Time: " + (BFStime-time) + "ns");
-		fp.writeData("BFS Maze", bfsMaze, "testCase6");	//prints out the BFS maze
 		
 		time = System.nanoTime();
 		dfsMaze = dfs.mazeSolverDFS(graph, s, startingCell);
 		long DFStime = System.nanoTime();
 		System.out.println("TestCase6 DFS Time: " + (DFStime-time) + "ns");
 		fp.writeData("DFS Maze", dfsMaze, "testCase6");	//prints out the DFS maze
+		
+		time = System.nanoTime(); //gets the current time so we can find out how long it actually takes BFS
+		bfsMaze = bfs.mazeSolverBFS(graph, s, startingCell, lastCell);
+		long BFStime = System.nanoTime();
+		System.out.println("TestCase6 BFS Time: " + (BFStime-time) + "ns");
+		fp.writeData("BFS Maze", bfsMaze, "testCase6");	//prints out the BFS maze
+		
 
-		shortestPathBFS = bfs.getShortestPath(lastCell);
+		shortestPathBFS = h.mazeShortestPath(s,bfs.getShortestPath(lastCell));
 		dfs.mazeDFS(graph, s, startingCell);
-		shortestPathDFS = dfs.getPath();
+		shortestPathDFS = dfs.getShortestPath();
 		assertEquals(shortestPathBFS, shortestPathDFS);		//compares the two short paths
 	}
 }
